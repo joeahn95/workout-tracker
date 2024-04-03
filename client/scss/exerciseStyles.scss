@@ -1,0 +1,26 @@
+#create-box {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border: 1px solid blue;
+}
+
+#create-box button {
+    font-size: 0.5rem;
+}
+
+#create-box--name, #create-box--link, #create-box--equipReq  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    margin: 10px;
+    border: 1px solid red;
+}
+
+#exercise-box {
+    border: 1px solid green;
+    margin: 10px;
+}
+
+
