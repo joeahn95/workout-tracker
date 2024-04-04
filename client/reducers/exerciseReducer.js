@@ -25,14 +25,14 @@ const exerciseReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case GET_EXERCISES: {
-        exerciseList = action.payload;
-        totalExercises = exerciseList.length;
+      exerciseList = action.payload;
+      totalExercises = exerciseList.length;
 
-        return {
-          ...state,
-          exerciseList,
-          totalExercises,
-        }
+      return {
+        ...state,
+        exerciseList,
+        totalExercises,
+      }
     }
     case ADD_EXERCISE: {
       exercise = action.payload;

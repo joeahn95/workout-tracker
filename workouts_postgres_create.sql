@@ -18,6 +18,14 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+-- CLEAR CUSTOM TABLES
+DROP TABLE public.exerciselist;
+DROP TABLE public.workoutlist;
+DROP TABLE public.workout_to_exercise;
+DROP TABLE public.workout_record;
+DROP TABLE public.body;
+DROP TABLE public.exercise_to_body;
+
 CREATE TABLE public.exerciseList (
 	"_id" serial NOT NULL,
 	"name" varchar NOT NULL,
@@ -52,17 +60,66 @@ CREATE TABLE public.workout_to_exercise (
 	"_id" serial NOT NULL,
 	"workout_id" int,
 	"exercise_id" int,
+	"sets" int,
+	"reps" int,
 	CONSTRAINT "workout_to_exercise_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
 );
 
-INSERT INTO public.workout_to_exercise VALUES (1, 1, 1);
-INSERT INTO public.workout_to_exercise VALUES (2, 1, 4);
-INSERT INTO public.workout_to_exercise VALUES (3, 1, 6);
-INSERT INTO public.workout_to_exercise VALUES (4, 2, 2);
-INSERT INTO public.workout_to_exercise VALUES (5, 2, 5);
-INSERT INTO public.workout_to_exercise VALUES (6, 2, 7);
+INSERT INTO public.workout_to_exercise VALUES (1, 1, 1, 3, 10);
+INSERT INTO public.workout_to_exercise VALUES (2, 1, 4, 2, 8);
+INSERT INTO public.workout_to_exercise VALUES (3, 1, 6, 4, 12);
+INSERT INTO public.workout_to_exercise VALUES (4, 2, 2, 3, 5);
+INSERT INTO public.workout_to_exercise VALUES (5, 2, 5, 5, 5);
+INSERT INTO public.workout_to_exercise VALUES (6, 2, 7, 4, 8);
+
+CREATE TABLE public.workout_record (
+	"_id" serial NOT NULL,
+	"workout_id" int,
+	"completed_date" date,
+	CONSTRAINT "workout_record_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+INSERT INTO public.workout_record VALUES (1, 1, '2023-11-11');
+INSERT INTO public.workout_record VALUES (2, 2, '2023-11-13');
+INSERT INTO public.workout_record VALUES (3, 1, '2023-11-27');
+
+CREATE TABLE public.body (
+	"_id" serial NOT NULL,
+	"part" varchar,
+	CONSTRAINT "body_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+INSERT INTO public.body VALUES (1, 'Chest');
+INSERT INTO public.body VALUES (2, 'Back');
+INSERT INTO public.body VALUES (3, 'Bicep');
+INSERT INTO public.body VALUES (4, 'Tricep');
+INSERT INTO public.body VALUES (5, 'Legs');
+
+
+CREATE TABLE public.exercise_to_body (
+	"_id" serial NOT NULL,
+	"exercise_id" int,
+	"body_id" int,
+	CONSTRAINT "exercise_to_body_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+INSERT INTO public.exercise_to_body VALUES (1, 1, 1);
+INSERT INTO public.exercise_to_body VALUES (2, 2, 5);
+INSERT INTO public.exercise_to_body VALUES (3, 3, 2);
+INSERT INTO public.exercise_to_body VALUES (4, 3, 5);
+INSERT INTO public.exercise_to_body VALUES (5, 4, 4);
+INSERT INTO public.exercise_to_body VALUES (6, 5, 5);
+INSERT INTO public.exercise_to_body VALUES (7, 6, 1);
+INSERT INTO public.exercise_to_body VALUES (8, 7, 5);
+
 
 
 -- CREATE TABLE  public.films (

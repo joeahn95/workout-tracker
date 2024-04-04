@@ -11,7 +11,7 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 import reducers from './reducers/index';
-import { getExerciseActionCreator, getWorkoutActionCreator } from './actions/actions';
+import { getExerciseActionCreator, getWorkoutActionCreator, getWorkoutHistoryActionCreator, getExerciseBodyActionCreator } from './actions/actions';
 
 // we are adding composeWithDevTools here to get easy access to the Redux dev tools
 // configureStore already includes composeWithDevTools
@@ -19,16 +19,68 @@ const store = configureStore({
   reducer: reducers,
 });
 
-// get initial exercises and workouts list on load
-fetch('/api/exercises/', {
-  method: 'GET',
-})
-  .then(res => res.json())
-  .then(data => {
-    store.dispatch(getExerciseActionCreator(data));
-  })
-  .catch(err => console.log('get exercises: ERROR: ', err));
+// get initial exercises on load
+const getExercises = async () => {
 
+  try {
+    const response = await fetch('/api/exercises/', {
+      method: 'GET',
+    });
+    const exerciseData = await response.json();
+
+    const bodyResponse = await fetch('/api/exercises/body', {
+      method: 'GET',
+    });
+    const bodyData = await bodyResponse.json();
+
+    // insert array of body parts to each exercise
+    bodyData.forEach(el => {
+      const foundObj = exerciseData.find(obj => obj.name === el.name);
+      if(foundObj.parts) foundObj.parts.push(el.part);
+        else foundObj.parts = [el.part];
+    })
+
+    console.log(exerciseData);
+
+    store.dispatch(getExerciseActionCreator(exerciseData));
+  } catch (err) {
+    console.log(err);
+  }
+
+
+}
+
+getExercises();
+
+// fetch('/api/exercises/', {
+//   method: 'GET',
+// })
+//   .then(res => res.json())
+//   .then(data => {
+//     console.log(data);
+//     store.dispatch(getExerciseActionCreator(data));
+//   })
+//   .catch(err => console.log('get exercises: ERROR: ', err));
+
+// get initial exercise to body part
+// fetch('/api/exercises/body', {
+//   method: 'GET',
+// })
+//   .then(res => res.json())
+//   .then(data => {
+//     // create object with exercise as key and body parts array as values
+//     const exerciseBody = {};
+//     data.forEach(el => {
+//       if (exerciseBody[el.name]) exerciseBody[el.name].push(el.part)
+//         else exerciseBody[el.name] = [el.part];
+//     })
+
+//     console.log(exerciseBody);
+//     store.dispatch(getExerciseBodyActionCreator(data));
+//   })
+//   .catch(err => console.log('get exercises: ERROR: ', err));
+
+// get initial list of workouts
 fetch('/api/workouts/', {
   method: 'GET',
 })
@@ -41,11 +93,47 @@ fetch('/api/workouts/', {
         else workoutObj[el.workout_name] = [el];
     })
     console.log(workoutObj);
+
+    const workoutList = [];
+    for (const key in workoutObj) {
+      workoutList.push({
+        workout_name: key,
+        workout_id: workoutObj[key][0].workout_id,
+        exercises: workoutObj[key].map(el => el.exercise_name),
+        exerciseIdx: workoutObj[key].map(el => el.exercise_id),
+        sets: workoutObj[key].map(el => el.sets),
+        reps: workoutObj[key].map(el => el.reps),
+      })
+    }
+    console.log(workoutList);
     
-    store.dispatch(getWorkoutActionCreator(workoutObj));
+    store.dispatch(getWorkoutActionCreator(workoutList));
   })
   .catch(err => console.log('get workouts: ERROR: ', err));
 
-fetch('/api/workouts/')
+// get initial workout history
+fetch('/api/workouts/history', {
+  method: 'GET',
+})
+  .then(res => res.json())
+  .then(data => {
+    const history = {
+      Chest: 0,
+      Back: 0,
+      Bicep: 0,
+      Tricep: 0,
+      Legs: 0,
+    };
+
+    data.forEach(el => {
+      history[el.part] += el.sets;
+    });
+
+    console.log(history);
+    store.dispatch(getWorkoutHistoryActionCreator(history))
+  })
+  .catch(err => console.log('get history: ERROR: ', err));
+
+
 
 export default store;

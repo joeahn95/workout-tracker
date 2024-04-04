@@ -19,5 +19,7 @@ export const ADD_EXERCISE = 'ADD_EXERCISE';
 export const DELETE_EXERCISE = 'DELETE_EXERCISE';
 
 export const GET_WORKOUTS = 'GET_WORKOUTS';
+export const GET_HISTORY = 'GET_HISTORY';
 export const ADD_WORKOUT = 'ADD_WORKOUT';
+export const COMPLETE_WORKOUT = 'COMPLETE_WORKOUT';
 export const DELETE_WORKOUT = 'DELETE_WORKOUT';

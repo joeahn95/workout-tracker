@@ -14,10 +14,17 @@ app.use(express.urlencoded({ extended: true }));
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
-// serve index.html on the route '/'
+// serve index.html on the route any of our page routes, 
+// the index.html file will auto direct
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });  
+app.get('/workouts', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+}); 
+app.get('/exercises', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+}); 
 
 // exercise functions
 app.use('/api/exercises', exerciseRouter);

@@ -10,7 +10,7 @@
  */
 
 // import actionType constants
-import {GET_EXERCISES, ADD_EXERCISE, DELETE_EXERCISE, GET_WORKOUTS, ADD_WORKOUT, DELETE_WORKOUT} from '../constants/actionTypes';
+import {GET_EXERCISES, ADD_EXERCISE, DELETE_EXERCISE, GET_WORKOUTS, GET_HISTORY, ADD_WORKOUT, DELETE_WORKOUT, COMPLETE_WORKOUT} from '../constants/actionTypes';
 
 // exercise action creators
 export const getExerciseActionCreator = (list) => ({
@@ -34,9 +34,19 @@ export const getWorkoutActionCreator = (list) => ({
   payload: list,
 });
 
-export const addWorkoutActionCreator = exercise => ({
+export const getWorkoutHistoryActionCreator = (obj) => ({
+  type: GET_HISTORY,
+  payload: obj,
+});
+
+export const addWorkoutActionCreator = workout => ({
   type: ADD_WORKOUT,
-  payload: exercise,
+  payload: workout,
+});
+
+export const completeWorkoutActionCreator = workout => ({
+  type: COMPLETE_WORKOUT,
+  payload: workout,
 });
 
 export const deleteWorkoutActionCreator = id => ({

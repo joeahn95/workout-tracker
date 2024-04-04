@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addExerciseActionCreator } from '../actions/actions.js';
 
-const createExercise = ({exerciseArr, numExercises}) => {
+const CreateExercise = ({exerciseArr, numExercises}) => {
 
   // states to track new exercise details
   const [name, setName] = useState('');
@@ -23,12 +23,6 @@ const createExercise = ({exerciseArr, numExercises}) => {
 
   // when exercise is added
   const handleClick = () => {
-    // reset form
-    setName('');
-    setLink('');
-    const button = document.getElementById('equip_req_field');
-    button.checked = false;
-    setEquipReq(false);
 
     // form request body
     const body = {
@@ -37,6 +31,13 @@ const createExercise = ({exerciseArr, numExercises}) => {
         vid_link: link,
         equip_req: equipReq
     }
+
+    // reset form
+    setName('');
+    setLink('');
+    const button = document.getElementById('equip_req_field');
+    button.checked = false;
+    setEquipReq(false);
     
     // add new exercise
     fetch('/api/exercises/', {
@@ -73,4 +74,4 @@ const createExercise = ({exerciseArr, numExercises}) => {
 
 };
 
-export default createExercise;
+export default CreateExercise;

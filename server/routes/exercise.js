@@ -9,6 +9,11 @@ router.get('/',
   (req, res) => res.status(200).json(res.locals.exercises)
 );
 
+router.get('/body',
+  exerciseController.getExerciseBody,
+  (req, res) => res.status(200).json(res.locals.exerciseBody)
+);
+
 router.post('/',
   exerciseController.addExercise,
   (req, res) => res.status(200).json({})

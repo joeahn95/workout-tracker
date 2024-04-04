@@ -15,6 +15,26 @@ exerciseController.getExercises = async (req, res, next) => {
     }
 }
 
+exerciseController.getExerciseBody = async (req, res, next) => {
+    const queryText = `SELECT exerciselist.name, body.part 
+    FROM exerciselist 
+    INNER JOIN exercise_to_body 
+    ON exerciselist._id=exercise_to_body.exercise_id 
+    INNER JOIN body 
+    ON exercise_to_body.body_id=body._id;`
+
+    try {
+        const response = await db.query(queryText);
+        res.locals.exerciseBody = await response.rows;
+        return next();
+    } catch (err) {
+        return next({
+            log: 'problem in getExerciseBody',
+            message: {err: 'cannot get exercise body list'}
+        })
+    }
+}
+
 exerciseController.addExercise = async (req, res, next) => {
     const {_id, name, vid_link, equip_req} = req.body;
 

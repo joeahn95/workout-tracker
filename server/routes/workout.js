@@ -9,8 +9,18 @@ router.get('/',
   (req, res) => res.status(200).json(res.locals.workouts)
 );
 
+router.get('/history',
+  workoutController.getWorkoutHistory,
+  (req, res) => res.status(200).json(res.locals.history)
+);
+
 router.post('/',
   workoutController.addWorkout,
+  (req, res) => res.status(200).json({})
+);
+
+router.post('/:id',
+  workoutController.completeWorkout,
   (req, res) => res.status(200).json({})
 );
 
