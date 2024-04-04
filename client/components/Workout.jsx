@@ -33,13 +33,11 @@ const Workout = ({id, name, exerciseArr, reps, sets, setObj}) => {
     // complete workout
     try {
 
-      console.log('hi')
+      alert('Good Job!')
 
       await fetch(`/api/workouts/${id}`, {
         method: 'POST',
       });
-
-      console.log('bye')
 
       await dispatch(completeWorkoutActionCreator(setObj));
     } catch (err) {
@@ -50,19 +48,19 @@ const Workout = ({id, name, exerciseArr, reps, sets, setObj}) => {
   const exerciseMap = exerciseArr.map((el, idx) => {
     return (
       <div key={idx}>
-        <p>{el}</p>
-        <p>sets: <span>{sets[idx]}</span></p>
-        <p>reps: <span>{reps[idx]}</span></p>
+        <span id='module--text'>{el}: </span>
+        <span id='module--text'>sets: <span>{sets[idx]} </span></span>
+        <span id='module--text'>reps: <span>{reps[idx]} </span></span>
       </div>
     )
   })
 
   return (
-    <div id="exercise-box">
-      <h3>{name}</h3>
+    <div id="module">
+      <span id='module--title'>{name}</span>
       {exerciseMap}
-      <button onClick={handleCompleteClick}>Complete Workout</button>
-      <button onClick={handleDeleteClick}>X</button>
+      <button id='workoutCompleteBtn' onClick={handleCompleteClick}>Complete Workout</button>
+      <button id='workoutDeleteBtn' onClick={handleDeleteClick}>X</button>
     </div>
   )
 };

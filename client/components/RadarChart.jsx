@@ -26,8 +26,8 @@ const RadarChart = ({history}) => {
         datasets: [{
           label: 'Sets',
           data: Object.values(history),
-          backgroundColor: 'aqua',
-          borderColor: 'black',
+          backgroundColor: 'rgb(26, 115, 232)',
+          borderColor: 'rgb(69, 141, 234)',
         }]
   }
     
@@ -35,10 +35,24 @@ const RadarChart = ({history}) => {
         scales: {
           r: {
             min: 0,
-            max: 100,
+            max: 80,
             ticks: {
-              stepSize: 5
+              stepSize: 5,
+              display: false,
             }
+          }
+        },
+        elements: {
+          line: {
+            borderWidth: 1,
+          },
+          point: {
+            pointRadius: 0,
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
           }
         }
   }

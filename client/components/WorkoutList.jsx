@@ -35,7 +35,6 @@ const WorkoutList = ({workoutList, numWorkouts, exerciseArr}) => {
 
   return (
     <div className="workoutList">
-      <h3>Workouts: {numWorkouts}</h3>
       {workoutMap}
     </div>
   )

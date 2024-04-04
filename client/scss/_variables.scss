@@ -1,0 +1,9 @@
+/* color palette */
+$primary-black: #050505;
+$secondary-black: lighten($primary-black, 30%);
+$light-grey: #7d7d7d;
+$super-light-grey: lighten($light-grey, 40%);
+$button-blue: rgb(26, 115, 232);
+$border-blue: rgb(69, 141, 234);
+$header-blue: lighten($border-blue, 20%);
+$background-white: lighten($light-grey, 80%);

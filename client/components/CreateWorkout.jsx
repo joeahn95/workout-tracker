@@ -23,14 +23,15 @@ const CreateWorkout = ({workoutObj, numWorkouts, exerciseArr}) => {
   const ExerciseDropdown = ({idx}) => {
     return (
         <div>
-          <label>Choose an exercise:</label>
+          <span>Exercise: </span>
           <select name='exercises' id='exercise-dropdown' value={entries[idx][0]} onChange={(e) => handleChange(idx, 0, e.target.value)}>{
             exerciseArr.map((el, idx) => {
               return <option key={idx} value={el.name}>{el.name}</option>
             })
           }</select>
-
+          <span>Sets: </span>
           <input id='sets' value={entries[idx][1]} type="text" onChange={(e) => handleChange(idx, 1, e.target.value)}/>
+          <span>Reps: </span>
           <input id='reps' value={entries[idx][2]} type="text" onChange={(e) => handleChange(idx, 2, e.target.value)}/>
         </div>
     )
@@ -75,8 +76,8 @@ const CreateWorkout = ({workoutObj, numWorkouts, exerciseArr}) => {
         const obj = exerciseArr.find(item => item.name === el[0]);
         payload.exercises.push(el[0]);
         payload.exerciseIdx.push(obj._id);
-        payload.sets.push(el[1]);
-        payload.reps.push(el[2]);
+        payload.sets.push(Number(el[1]));
+        payload.reps.push(Number(el[2]));
     })
 
     // clear form

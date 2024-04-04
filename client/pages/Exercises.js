@@ -10,10 +10,11 @@ const Exercises = props => {
   const numExercises = useSelector(state => state.exercises.totalExercises);
 
   return (
-    <div>
-      <h2>Exercises Page</h2>
-      <CreateExercise exerciseArr={exerciseArr} numExercises={numExercises}/>
-      <ExerciseList exerciseArr={exerciseArr} numExercises={numExercises}/>
+    <div id='page'>
+      <h2 id='page--header'>Exercises Page</h2>
+      <h3 id='page--subheader'>Exercises: {numExercises}</h3>
+      <CreateExercise id='createExercise' exerciseArr={exerciseArr} numExercises={numExercises}/>
+      <ExerciseList id='exerciseList' exerciseArr={exerciseArr} numExercises={numExercises}/>
     </div>
   );
 };

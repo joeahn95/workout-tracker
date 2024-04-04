@@ -1,10 +1,67 @@
-@import './exerciseStyles.scss';
-@import './workoutStyles.scss';
-@import './homeStyles.scss';
+@import './pages/exerciseStyles.scss';
+@import './pages/workoutStyles.scss';
+@import './pages/homeStyles.scss';
+@import './variables.scss';
+
 
 body {
   margin: 0;
   padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: $background-white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $header-blue;
+}
+
+#header--right {
+  display: flex;
+  justify-content: space-between;
+  color: $secondary-black;
+}
+
+#page {
+  margin: 10px;
+}
+
+#page--header {
+  color: $primary-black;
+  font-size: 1.5rem;
+}
+
+#link {
+  text-decoration: none;
+  color: $secondary-black;
+  font-size: 0.75rem;
+  margin: 10px;
+}
+
+#header--left {
+  color: $secondary-black;
+}
+
+#module {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  width: 300px;
+  margin: 10px 10px 10px 0px;
+  color: $secondary-black;
+  background-color: $super-light-grey;
+  font-size: 0.75rem;
+}
+
+#module--title {
+  margin-bottom: 10px;
+}
+
+#module--text {
+  color: $light-grey;
 }
 
 

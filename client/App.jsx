@@ -13,13 +13,15 @@ const App = props => {
   return (
     <div>
       <BrowserRouter>
-        <div>
-          <Link to='/'>Home</Link>
-          <br/>
-          <Link to='/exercises'>Exercises</Link>
-          <br/>
-          <Link to='/workouts'>Workouts</Link>
-        </div>
+        <header>
+          <div id='header--left'>
+            <Link id='link' to='/'>Workout Tracker</Link>
+          </div>
+          <div id='header--right'>
+            <Link id='link' to='/exercises'>Exercises</Link>
+            <Link id='link' to='/workouts'>Workouts</Link>
+          </div>
+        </header>
 
         <Routes>
           <Route index element={<Home />} />

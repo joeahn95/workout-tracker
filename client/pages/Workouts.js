@@ -11,8 +11,9 @@ const Workouts = props => {
   const exerciseArr = useSelector(state => state.exercises.exerciseList);
 
   return (
-    <div>
+    <div id='page'>
       <h2>Workouts Page</h2>
+      <h3>Workouts: {numWorkouts}</h3>
       <CreateWorkout workoutList={workoutList} numWorkouts={numWorkouts} exerciseArr={exerciseArr}/>
       <WorkoutList workoutList={workoutList} numWorkouts={numWorkouts} exerciseArr={exerciseArr}/>
     </div>

@@ -21,7 +21,6 @@ const store = configureStore({
 
 // get initial exercises on load
 const getExercises = async () => {
-
   try {
     const response = await fetch('/api/exercises/', {
       method: 'GET',
@@ -40,45 +39,15 @@ const getExercises = async () => {
         else foundObj.parts = [el.part];
     })
 
-    console.log(exerciseData);
+    console.log('exercises: ', exerciseData);
 
     store.dispatch(getExerciseActionCreator(exerciseData));
   } catch (err) {
     console.log(err);
   }
-
-
 }
 
 getExercises();
-
-// fetch('/api/exercises/', {
-//   method: 'GET',
-// })
-//   .then(res => res.json())
-//   .then(data => {
-//     console.log(data);
-//     store.dispatch(getExerciseActionCreator(data));
-//   })
-//   .catch(err => console.log('get exercises: ERROR: ', err));
-
-// get initial exercise to body part
-// fetch('/api/exercises/body', {
-//   method: 'GET',
-// })
-//   .then(res => res.json())
-//   .then(data => {
-//     // create object with exercise as key and body parts array as values
-//     const exerciseBody = {};
-//     data.forEach(el => {
-//       if (exerciseBody[el.name]) exerciseBody[el.name].push(el.part)
-//         else exerciseBody[el.name] = [el.part];
-//     })
-
-//     console.log(exerciseBody);
-//     store.dispatch(getExerciseBodyActionCreator(data));
-//   })
-//   .catch(err => console.log('get exercises: ERROR: ', err));
 
 // get initial list of workouts
 fetch('/api/workouts/', {
@@ -105,7 +74,7 @@ fetch('/api/workouts/', {
         reps: workoutObj[key].map(el => el.reps),
       })
     }
-    console.log(workoutList);
+    console.log('workouts: ', workoutList);
     
     store.dispatch(getWorkoutActionCreator(workoutList));
   })
@@ -129,11 +98,9 @@ fetch('/api/workouts/history', {
       history[el.part] += el.sets;
     });
 
-    console.log(history);
+    console.log('history: ', history);
     store.dispatch(getWorkoutHistoryActionCreator(history))
   })
   .catch(err => console.log('get history: ERROR: ', err));
-
-
 
 export default store;

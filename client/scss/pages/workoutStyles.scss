@@ -1,0 +1,50 @@
+@import '../variables.scss';
+
+#create-workout-box {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    border: 1px solid $border-blue;
+    background-color: $header-blue;
+    border-radius: 10px;
+    padding: 10px;
+    color: $secondary-black;
+    font-size: 0.75rem;
+}
+
+
+#create-workout-box--name  {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 10px;
+}
+
+#create-workout-box button, #workoutCompleteBtn {
+    margin-top: 10px;
+    background-color: $button-blue;
+    border: 1px solid $border-blue;
+    border-radius: 4px;
+    color: white;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 0.6rem;
+}
+
+.workoutList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#workoutDeleteBtn {
+    background-color: $background-white;
+    border: 1px solid $light-grey;
+    border-radius: 4px;
+    margin-top: 10px;
+    color: red;
+    width: 25px;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 0.6rem;
+}
+

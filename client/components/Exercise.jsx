@@ -13,7 +13,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteExerciseActionCreator } from '../actions/actions.js';
 
-const Exercise = ({id, name, vid_link, equip_req}) => {
+const Exercise = ({id, name, vid_link, equip_req, parts}) => {
   // have to change the youtube link to some embed format
   const url = vid_link.slice(32, 43);
   
@@ -29,11 +29,21 @@ const Exercise = ({id, name, vid_link, equip_req}) => {
       .catch(err => console.log('delete exercises: ERROR: ', err));
   }
 
+  const CheckMark = ({cond}) => {
+    if (cond) {
+      return (<span>yes</span>);
+    } else {
+      return (<span>no</span>);
+    }
+  }
+
   return (
-    <div id="exercise-box">
-      <p>{name}</p>
-      {/* <iframe width="210" height="158" src={"https://www.youtube.com/embed/" + url}></iframe> */}
-      <button onClick={handleClick}>X</button>
+    <div id="module">
+      <span id='module--title'>{name}</span>
+      <span id='module--text'>Equip Required: <CheckMark cond={equip_req}/></span>
+      <span id='module--text'>{`Parts Worked: ${parts}`}</span>
+      <iframe id='video' src={"https://www.youtube.com/embed/" + url}></iframe>
+      <button id='exercise-box--button' onClick={handleClick}>X</button>
     </div>
   )
 };

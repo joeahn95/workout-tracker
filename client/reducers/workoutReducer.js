@@ -57,6 +57,8 @@ const workoutReducer = (state = initialState, action) => {
       workoutList = [...state.workoutList];
       workoutList.push(workout);
 
+      console.log(workoutList);
+
       return {
         ...state,
         workoutList,
@@ -64,7 +66,6 @@ const workoutReducer = (state = initialState, action) => {
       }
     }
     case COMPLETE_WORKOUT: {
-      console.log('completed')
       workout = action.payload;
       history = {...state.history};
 

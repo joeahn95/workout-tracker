@@ -36,10 +36,36 @@ exerciseController.getExerciseBody = async (req, res, next) => {
 }
 
 exerciseController.addExercise = async (req, res, next) => {
-    const {_id, name, vid_link, equip_req} = req.body;
+    const {_id, name, vid_link, equip_req, parts} = req.body;
+    
+    const body = {
+        Chest: 1,
+        Back: 2,
+        Bicep: 3,
+        Tricep: 4, 
+        Legs: 5,
+    }
+
+    // convert parts to part_id
+    const parts_id = parts.map(part => body[part]);
 
     try {
+        // get max _id of exercise_to_body
+        const result = await db.query('SELECT MAX(_id) FROM exercise_to_body');
+        let exercise_to_body_id = result.rows[0].max + 1;
+
+        // construct query for exercise_to_body
+        let queryText = 'INSERT INTO exercise_to_body VALUES ';
+        parts_id.forEach(part_id => {
+            queryText += `(${exercise_to_body_id}, ${_id}, ${part_id}),`;
+            exercise_to_body_id++;
+          })
+        queryText = queryText.slice(0, -1) + ';';
+
+        // execute
+        await db.query(queryText);
         await db.query(`INSERT INTO exerciselist VALUES (${_id}, '${name}', '${vid_link}', ${equip_req})`);
+        
         return next();
     } catch (err) {
         return next({
@@ -54,6 +80,7 @@ exerciseController.deleteExercise = async (req, res, next) => {
 
     try {
         await db.query(`DELETE FROM exerciselist WHERE _id = ${id}`);
+        await db.query(`DELETE FROM exercise_to_body WHERE exercise_id = ${id}`);
         await db.query(`DELETE FROM workout_to_exercise WHERE exercise_id = ${id}`)
         return next();
     } catch (err) {

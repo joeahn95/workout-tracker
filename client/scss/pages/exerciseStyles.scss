@@ -1,0 +1,73 @@
+@import '../variables.scss';
+
+#create-box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $border-blue;
+    background-color: $header-blue;
+    border-radius: 10px;
+    font-size: 0.75rem;
+}
+
+#create-box--options {
+    display: flex;
+}
+
+#create-box--parts {
+    display: flex;
+    margin: 10px;
+    color: $secondary-black;
+}
+
+#parts--radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 2px 0px 2px;
+}
+
+#create-box--button {
+    width: 130px;
+    margin: 10px;
+    background-color: $button-blue;
+    border: 1px solid $border-blue;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.6rem;
+    padding: 4px;
+}
+
+#create-box--name, #create-box--link, #create-box--equipReq  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    margin: 10px;
+    color: $secondary-black;
+}
+
+.exerciseList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#video {
+    margin-top: 10px;
+    width: 100%;  
+}
+
+#exercise-box--button {
+    background-color: $background-white;
+    border: 1px solid $light-grey;
+    border-radius: 4px;
+    margin-top: 10px;
+    color: red;
+    width: 25px;
+    cursor: pointer;
+    font-size: 0.6rem;
+}
+
+
+
+
