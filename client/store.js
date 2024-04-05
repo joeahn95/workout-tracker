@@ -86,7 +86,8 @@ fetch('/api/workouts/history', {
 })
   .then(res => res.json())
   .then(data => {
-    const history = {
+    // get workout history by body part
+    const bodyHistory = {
       Chest: 0,
       Back: 0,
       Bicep: 0,
@@ -94,12 +95,21 @@ fetch('/api/workouts/history', {
       Legs: 0,
     };
 
+    // get workout history by day of week
+    const dayHistory = [0,0,0,0,0,0,0];
+
     data.forEach(el => {
-      history[el.part] += el.sets;
+      bodyHistory[el.part] += el.sets;
+      const d = new Date(el.completed_date);
+      dayHistory[d.getDay()]+= el.sets;
     });
 
-    console.log('history: ', history);
-    store.dispatch(getWorkoutHistoryActionCreator(history))
+    console.log('day history: ', dayHistory);
+    console.log('history: ', bodyHistory);
+    store.dispatch(getWorkoutHistoryActionCreator({
+      dayHistory,
+      bodyHistory,
+    }));
   })
   .catch(err => console.log('get history: ERROR: ', err));
 

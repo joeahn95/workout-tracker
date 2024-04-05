@@ -5,12 +5,11 @@ import { useSelector } from "react-redux";
 import RadarChart from '../components/RadarChart.jsx';
 import BarChart from "../components/BarChart.jsx";
 
-
-
 const Home = props => {
 
   // import workout history
   const history = useSelector(state => state.workouts.history);
+  const dayHistory = useSelector(state => state.workouts.dayHistory);
 
   return (
     <div id='page'>
@@ -20,9 +19,9 @@ const Home = props => {
           <span>Sets Progress</span>
           <RadarChart history={history}/>
         </div>
-        <div style={{height: '300px'}} id='module'>
+        <div style={{height: '170px'}} id='module'>
           <span>Workout Days</span>
-          <BarChart/>
+          <BarChart history={dayHistory}/>
         </div>
       </body>
     </div>

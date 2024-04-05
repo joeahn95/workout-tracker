@@ -39,7 +39,13 @@ const Workout = ({id, name, exerciseArr, reps, sets, setObj}) => {
         method: 'POST',
       });
 
-      await dispatch(completeWorkoutActionCreator(setObj));
+      const date = new Date();
+      const day = date.getDay();
+
+      await dispatch(completeWorkoutActionCreator({
+        setObj,
+        day,
+      }));
     } catch (err) {
       console.log('complete workout: ERROR: ', err)
     }

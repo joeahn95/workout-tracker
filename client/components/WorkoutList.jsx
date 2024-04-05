@@ -17,6 +17,7 @@ const WorkoutList = ({workoutList, numWorkouts, exerciseArr}) => {
   const workoutMap = workoutList.map((el, idx) => {
 
     // create object that gathers how many sets done for each body part with each workout
+    // when we finish a workout, it will simply send this object to record sets per body part
     const setObj = {};
 
     el.exercises.forEach((ex, idx) => {

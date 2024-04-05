@@ -21,13 +21,13 @@ ChartJS.register(
 
 const BarChart = ({history}) => {
   const data = {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         datasets: [{
           label: 'Days',
-          data: [1,2,3,4,5, 6, 7],
+          data: history,
           backgroundColor: 'rgb(26, 115, 232)',
           borderColor: 'rgb(69, 141, 234)',
-          borerWidth: 1,
+          borderWidth: 1,
         }]
   }
     
@@ -35,9 +35,9 @@ const BarChart = ({history}) => {
         scales: {
           y: {
             min: 0,
-            max: 20,
+            max: 80,
             ticks: {
-              stepSize: 1,
+              stepSize: 5,
             }
           }
         },

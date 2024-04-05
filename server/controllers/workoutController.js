@@ -27,7 +27,7 @@ workoutController.getWorkouts = async (req, res, next) => {
 
 workoutController.getWorkoutHistory = async (req, res, next) => {
     const queryText = 
-    `SELECT workout_to_exercise.sets, workout_to_exercise.reps, body.part 
+    `SELECT workout_to_exercise.sets, workout_to_exercise.reps, body.part, workout_record.completed_date
     FROM workout_record 
     INNER JOIN workout_to_exercise 
     ON workout_record.workout_id=workout_to_exercise.workout_id 

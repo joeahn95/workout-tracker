@@ -19,7 +19,8 @@ const initialState = {
     Bicep: 0,
     Tricep: 0,
     Legs: 0
-  }
+  },
+  dayHistory: [0,0,0,0,0,0,0]
 };
 
 const workoutReducer = (state = initialState, action) => {
@@ -28,6 +29,8 @@ const workoutReducer = (state = initialState, action) => {
   let workoutList;
   let totalWorkouts;
   let history;
+  let dayHistory;
+  let payload;
 
   // reducers shouldn't perform actions like fetching, it should only take the payload and update the state
   switch (action.type) {
@@ -43,11 +46,12 @@ const workoutReducer = (state = initialState, action) => {
         }
     }
     case GET_HISTORY: {
-      history = action.payload;
+      payload = action.payload;
 
       return {
         ...state,
-        history,
+        history: payload.bodyHistory,
+        dayHistory: payload.dayHistory,
       }
     }
     case ADD_WORKOUT: {
@@ -66,17 +70,22 @@ const workoutReducer = (state = initialState, action) => {
       }
     }
     case COMPLETE_WORKOUT: {
-      workout = action.payload;
+      const payload = action.payload;
+      workout = payload.setObj;
+      const day = payload.day;
       history = {...state.history};
+      dayHistory = [...state.dayHistory];
 
       for (const key in workout) {
         history[key] += workout[key];
+        dayHistory[day] += workout[key];
       }
       console.log(history);
 
       return {
         ...state,
         history,
+        dayHistory,
       }
     }
     case DELETE_WORKOUT: {
